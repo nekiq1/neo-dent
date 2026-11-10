@@ -1,0 +1,289 @@
+@import "tailwindcss";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/playfair-display/500.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/500-italic.css";
+@import "react-day-picker/style.css";
+
+@theme {
+  --color-bg: #f6f3ee;
+  --color-bg-deep: #e7e1d6;
+  --color-surface: #fffcf8;
+  --color-ink: #1a2330;
+  --color-muted: #3e4c5c;
+  --color-line: #d5cdc0;
+  --color-primary: #1e4d7b;
+  --color-primary-deep: #143656;
+  --color-on-primary: #f7f4ee;
+  --color-header: #152033;
+  --color-header-fg: #f4efe6;
+  --color-header-muted: #c9c0b2;
+  --color-accent: #b8502a;
+  --color-accent-bright: #e7a27a;
+  --color-accent-soft: #f6e4d8;
+  --color-danger: #9a3412;
+  --font-sans: "Manrope", "Segoe UI", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --text-hero: clamp(2.5rem, 5.2vw, 4.6rem);
+  --text-display: clamp(1.9rem, 3vw, 3.05rem);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  ::selection {
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+  }
+  a {
+    color: inherit;
+  }
+}
+
+@layer components {
+  .shell {
+    width: min(76rem, calc(100% - 2rem));
+    margin-inline: auto;
+  }
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 1.15rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-weight: 650;
+    font-size: 0.95rem;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease,
+      scale 150ms ease;
+  }
+  .btn:active:not(:disabled) {
+    scale: 0.96;
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: default;
+  }
+  .btn-solid {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+  .btn-solid:hover {
+    background: var(--color-primary-deep);
+  }
+  .btn-accent {
+    background: var(--color-accent);
+    color: #fffaf6;
+  }
+  .btn-accent:hover {
+    background: #8f3d1e;
+  }
+  .btn-line {
+    background: transparent;
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+  .btn-line:hover {
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+  }
+  .btn-line-light {
+    background: transparent;
+    border-color: var(--color-header-muted);
+    color: var(--color-header-fg);
+  }
+  .btn-line-light:hover {
+    background: var(--color-header-fg);
+    color: var(--color-header);
+  }
+  .btn-quiet {
+    background: transparent;
+    color: var(--color-primary);
+    padding-inline: 0.2rem;
+  }
+  .field {
+    width: 100%;
+    min-height: 2.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.7rem;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+  }
+  textarea.field {
+    min-height: 8rem;
+    resize: vertical;
+  }
+  .field:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+  }
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.35rem 0.1rem;
+    color: var(--color-header-muted);
+    font-size: 0.92rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0.45rem;
+    left: 0;
+    height: 2px;
+    background: var(--color-accent-bright);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 220ms ease;
+  }
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--color-header-fg);
+  }
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+  }
+  .logo-mark {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border-radius: 0.7rem;
+    background: var(--color-accent);
+    color: #fffaf6;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+  }
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-deep) 25%,
+      var(--color-surface) 37%,
+      var(--color-bg-deep) 63%
+    );
+    background-size: 400% 100%;
+    animation: shimmer 1.35s ease infinite;
+  }
+  .page-rise {
+    animation: rise 0.55s ease both;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(4px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease,
+      filter 0.6s ease;
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .stat-bar {
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--color-bg-deep);
+    overflow: hidden;
+  }
+  .stat-bar > span {
+    display: block;
+    height: 100%;
+    width: var(--w);
+    border-radius: inherit;
+    background: var(--color-primary);
+  }
+  .neo-cal {
+    --rdp-accent-color: var(--color-primary);
+    --rdp-accent-background-color: var(--color-accent-soft);
+    --rdp-today-color: var(--color-accent);
+    --rdp-day_button-border-radius: 8px;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .page-rise,
+  .shimmer,
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .btn:active {
+    scale: 1;
+  }
+  .stat-bar > span {
+    width: var(--w);
+    transition: none;
+  }
+}
